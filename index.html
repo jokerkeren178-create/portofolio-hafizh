@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio hafizh | Creative Showcase</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cyan: '#06b6d4',
+                            purple: '#a855f7',
+                            pink: '#ec4899',
+                            emerald: '#10b981',
+                            amber: '#f59e0b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom Glassmorphism & Scrollbar Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0f19;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        .glass {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: var(--accent-color, #06b6d4);
+            box-shadow: 0 10px 30px -10px var(--accent-glow, rgba(6, 182, 212, 0.3));
+            transform: translateY(-4px);
+        }
+
+        /* Accent theme helper variables */
+        :root {
+            --accent-color: #06b6d4;
+            --accent-glow: rgba(6, 182, 212, 0.3);
+            --accent-gradient: linear-gradient(135deg, #06b6d4, #3b82f6);
+        }
+
+        .theme-purple {
+            --accent-color: #a855f7;
+            --accent-glow: rgba(168, 85, 247, 0.3);
+            --accent-gradient: linear-gradient(135deg, #a855f7, #ec4899);
+        }
+
+        .theme-emerald {
+            --accent-color: #10b981;
+            --accent-glow: rgba(16, 185, 129, 0.3);
+            --accent-gradient: linear-gradient(135deg, #10b981, #06b6d4);
+        }
+
+        .theme-amber {
+            --accent-color: #f59e0b;
+            --accent-glow: rgba(245, 158, 11, 0.3);
+            --accent-gradient: linear-gradient(135deg, #f59e0b, #ef4444);
+        }
+
+        .text-accent { color: var(--accent-color); }
+        .bg-accent { background-color: var(--accent-color); }
+        .border-accent { border-color: var(--accent-color); }
+        .bg-accent-gradient { background: var(--accent-gradient); }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+
+        /* Pulse glow animation */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+        .glow-bg {
+            animation: pulseGlow 6s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="selection:bg-cyan-500 selection:text-black">
+
+    <!-- Ambient Glowing Background Elements -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none glow-bg"></div>
+    <div class="fixed bottom-10 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none glow-bg" style="animation-delay: 3s;"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-gray-800/50 px-4 lg:px-12 py-3 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#home" class="flex items-center gap-2 font-extrabold text-xl tracking-wider">
+                <span class="w-8 h-8 rounded-lg bg-accent-gradient flex items-center justify-center text-black font-black">H</span>
+                <span>Portofolio<span class="text-accent"> hafizh</span></span>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#home" class="hover:text-accent transition-colors">Home</a>
+                <a href="#about" class="hover:text-accent transition-colors">Tentang Saya</a>
+                <a href="#karya" class="hover:text-accent transition-colors">Karya & Project</a>
+                <a href="#galeri" class="hover:text-accent transition-colors">Muka & Galeri</a>
+                <a href="#pesan" class="hover:text-accent transition-colors">Pesan Rahasia</a>
+            </div>
+
+            <!-- Theme Switcher & Mobile Menu Toggle -->
+            <div class="flex items-center gap-3">
+                <!-- Theme Palette Selector -->
+                <div class="flex items-center gap-1.5 p-1.5 bg-gray-900/80 rounded-full border border-gray-800">
+                    <button onclick="setTheme('')" class="w-4 h-4 rounded-full bg-cyan-500 ring-2 ring-transparent hover:scale-110 transition-transform" title="Cyan Theme"></button>
+                    <button onclick="setTheme('theme-purple')" class="w-4 h-4 rounded-full bg-purple-500 ring-2 ring-transparent hover:scale-110 transition-transform" title="Purple Theme"></button>
+                    <button onclick="setTheme('theme-emerald')" class="w-4 h-4 rounded-full bg-emerald-500 ring-2 ring-transparent hover:scale-110 transition-transform" title="Emerald Theme"></button>
+                    <button onclick="setTheme('theme-amber')" class="w-4 h-4 rounded-full bg-amber-500 ring-2 ring-transparent hover:scale-110 transition-transform" title="Amber Theme"></button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-white p-2 text-xl">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden pt-4 pb-2 px-2 flex flex-col gap-3 border-t border-gray-800/80 mt-3">
+            <a href="#home" class="mobile-link px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-200">Home</a>
+            <a href="#about" class="mobile-link px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-200">Tentang Saya</a>
+            <a href="#karya" class="mobile-link px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-200">Karya & Project</a>
+            <a href="#galeri" class="mobile-link px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-200">Muka & Galeri</a>
+            <a href="#pesan" class="mobile-link px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-200">Pesan Rahasia</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="min-h-screen pt-28 pb-16 flex items-center justify-center relative px-4">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            
+            <!-- Left Info -->
+            <div class="md:col-span-7 flex flex-col items-start gap-5 text-center md:text-left">
+                <!-- Status Badge -->
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass border border-gray-700/60 text-xs font-semibold text-gray-300">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 -ml-4"></span>
+                    <span>Lagi fokus masa depan</span>
+                </div>
+
+                <!-- Main Greeting -->
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
+                    Halo, Saya <br/>
+                    <span class="bg-accent-gradient bg-clip-text text-transparent"> Muhammad hafizh.i</span>
+                </h1>
+
+                <!-- Dynamic Typing Subtitle -->
+                <div class="text-lg sm:text-xl font-mono text-gray-400 h-8 flex items-center justify-center md:justify-start">
+                    <span>Suka ngulik&nbsp;</span>
+                    <span id="typingText" class="text-accent font-semibold border-r-2 border-accent pr-1 animate-pulse"></span>
+                </div>
+
+                <p class="text-gray-400 text-sm sm:text-base leading-relaxed max-w-lg">
+                    Selamat datang di pojok ekperimen web pribadi saya. Isinya karya editan iseng saya 
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2">
+                    <a href="#karya" class="px-6 py-3 rounded-xl bg-accent-gradient text-black font-extrabold text-sm hover:opacity-90 transition-all shadow-lg hover:shadow-accent/20 flex items-center gap-2">
+                        <i class="fa-solid fa-code"></i> Lihat Karya
+                    </a>
+                    <a href="#pesan" class="px-6 py-3 rounded-xl glass hover:bg-gray-800 text-gray-200 text-sm font-semibold border border-gray-700 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-paper-plane text-accent"></i> Kirim Pesan
+                    </a>
+                </div>
+
+                <!-- Social Links -->
+                <div class="flex items-center gap-4 pt-4 text-gray-400">
+                    <a href="https://github.com" target="_blank" class="hover:text-accent text-xl transition-colors"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.instagram.com/hfh.321?xtok=MXYxZDJxdzN6bHNudg==" target="_blank" class="hover:text-accent text-xl transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@platofizh?_r=1&_t=ZS-9Aecf5arzes" target="_blank" class="hover:text-accent text-xl transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="mailto:email@example.com" class="hover:text-accent text-xl transition-colors"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+
+            <!-- Right Avatar Photo Card -->
+            <div class="md:col-span-5 flex justify-center">
+                <div class="relative group">
+                    <!-- Glowing Outline -->
+                    <div class="absolute -inset-1 bg-accent-gradient rounded-3xl blur opacity-40 group-hover:opacity-75 transition duration-500"></div>
+                    
+                    <!-- Main Card -->
+                    <div class="relative w-64 h-80 sm:w-72 sm:h-96 rounded-3xl overflow-hidden glass border border-gray-700/60 p-3 flex flex-col">
+                        <div class="w-full h-full rounded-2xl overflow-hidden relative">
+                            <img src="fotomuka 1.jpeg" 
+                                 alt="Profile Photo" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            
+                            <!-- Overlay Info -->
+                            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-4 flex flex-col gap-1">
+                                <span class="text-xs font-mono text-accent">@hfh.321</span>
+                                <span class="text-sm font-semibold text-white">Pelajar & Calon CEO</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TENTANG SAYA SECTION -->
+    <section id="about" class="py-20 px-4 border-t border-gray-800/60 bg-gray-950/40">
+        <div class="max-w-5xl mx-auto">
+            <!-- Title Header -->
+            <div class="text-center mb-12">
+                <span class="text-xs font-mono text-accent uppercase tracking-widest">Siapa Aku?</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-1">Tentang Saya</h2>
+                <div class="w-16 h-1 bg-accent-gradient mx-auto mt-3 rounded-full"></div>
+            </div>
+
+            <!-- About Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Bio Card -->
+                <div class="glass-card p-6 rounded-2xl md:col-span-2 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-3 rounded-xl bg-accent/10 text-accent text-xl">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">Biografi Singkat</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Saya adalah siswa dari SMKN 1 majalaya di jurusan Desain komunikasi visual yang selalu mencoba hal baru.
+                        </p>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Motto hidup saat ini: <em class="text-gray-200">"Menuju masa depan sukses cihuy"</em>
+                        </p>
+                    </div>
+
+                    <!-- Mini Stat Badges -->
+                    <div class="grid grid-cols-3 gap-3 mt-6 pt-4 border-t border-gray-800">
+                        <div class="text-center">
+                            <span class="block text-2xl font-extrabold text-accent">7</span>
+                            <span class="text-xs text-gray-400">Project Gabut</span>
+                        </div>
+                        <div class="text-center">
+                            <span class="block text-2xl font-extrabold text-accent">99%</span>
+                            <span class="text-xs text-gray-400">Keinginan Tahu</span>
+                        </div>
+                        <div class="text-center">
+                            <span class="block text-2xl font-extrabold text-accent">☕ 99+</span>
+                            <span class="text-xs text-gray-400">Cangkir Kopi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fun Facts Card -->
+                <div class="glass-card p-6 rounded-2xl flex flex-col gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="p-3 rounded-xl bg-purple-500/10 text-purple-400 text-xl">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Fun Facts</h3>
+                    </div>
+
+                    <ul class="flex flex-col gap-3 text-sm text-gray-300">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-accent mt-1"></i>
+                            <span>Suka ngedit gabut sambil dengerin musik.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-accent mt-1"></i>
+                            <span>Bisa pake Berbagai Tools edit kaya Adobe dan corel</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-accent mt-1"></i>
+                            <span>Hobi main game </span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-accent mt-1"></i>
+                            <span>Penasaran sama dunia per codingan</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Tech Stack & Skills -->
+            <div class="mt-8 glass-card p-6 rounded-2xl">
+                <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-accent"></i> Tech Stack & Tools Favorit
+                </h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1.5 rounded-lg bg-gray-800 text-gray-300 border border-gray-700 text-xs font-mono flex items-center gap-2">
+                        <i class="fa-brands fa-python text-yellow-400"></i> Python
+                    </span>
+                    <span class="px-3 py-1.5 rounded-lg bg-gray-800 text-gray-300 border border-gray-700 text-xs font-mono flex items-center gap-2">
+                        <span>🎨</span></i> Adobe photoshop
+                    </span>
+                    <span class="px-3 py-1.5 rounded-lg bg-gray-800 text-gray-300 border border-gray-700 text-xs font-mono flex items-center gap-2">
+                    </i><span>✒️</span></i> Adobe ilustrator
+                    </span>
+                    <span class="px-3 py-1.5 rounded-lg bg-gray-800 text-gray-300 border border-gray-700 text-xs font-mono flex items-center gap-2">
+                        <span>🖌️</span></i> Corel draw
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- KARYA & PROJECT SECTION -->
+    <section id="karya" class="py-20 px-4 border-t border-gray-800/60">
+        <div class="max-w-5xl mx-auto">
+            <!-- Header & Filter -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-xs font-mono text-accent uppercase tracking-widest">Showcase Hasil Gabut tapi berkarya</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold mt-1">Karya & Project</h2>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="flex flex-wrap gap-2" id="projectFilters">
+                    <button onclick="filterProjects('all', event)" class="filter-btn active px-4 py-1.5 rounded-xl text-xs font-semibold bg-accent text-black transition-all">Semua</button>
+                    <button onclick="filterProjects('python', event)" class="filter-btn px-4 py-1.5 rounded-xl text-xs font-semibold bg-gray-800 text-gray-300 hover:bg-gray-700 transition-all">Python Scripts</button>
+                    <button onclick="filterProjects('poster', event)" class="filter-btn px-4 py-1.5 rounded-xl text-xs font-semibold bg-gray-800 text-gray-300 hover:bg-gray-700 transition-all">Poster</button>
+                    <button onclick="filterProjects('design', event)" class="filter-btn px-4 py-1.5 rounded-xl text-xs font-semibold bg-gray-800 text-gray-300 hover:bg-gray-700 transition-all">UI / Design</button>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projectsContainer">
+                
+                <!-- Card 1: Auto Sorter Python -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden flex flex-col" data-category="python">
+                    <div class="h-44 bg-gray-900 relative overflow-hidden flex items-center justify-center p-4">
+                        <!-- Code Visual Backdrop -->
+                        <div class="w-full h-full font-mono text-[10px] text-emerald-400/60 leading-tight select-none overflow-hidden">
+                            import os, watchdog<br/>
+                            from pathlib import Path<br/>
+                            def auto_sort_files():<br/>
+                            &nbsp;&nbsp;print("Sorting Downloads...")<br/>
+                            &nbsp;&nbsp;for file in folder.iterdir():<br/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;move_to_category(file)<br/>
+                        </div>
+                        <span class="absolute top-3 right-3 px-2 py-1 rounded bg-yellow-500/20 text-yellow-300 border border-yellow-500/30 text-[10px] font-mono">Python</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg text-white mb-2">Folder Auto-Sorter Script</h3>
+                            <p class="text-gray-400 text-xs leading-relaxed mb-4">
+                                Script pemantau folder otomatis menggunakan Python Watchdog untuk memilah file unduhan berdasarkan ekstensinya.
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between border-t border-gray-800 pt-3 mt-2">
+                            <span class="text-[11px] font-mono text-gray-500">Automation</span>
+                            <button onclick="openModal('Project Auto Sorter', 'Program Python ini memantau folder target secara real-time dan merapikan file lama mau pun baru berdasarkan format seperti Documents, Images, dan Archives.', 'import os\nfrom pathlib import Path\nfrom watchdog.observers import Observer\n\n# Auto Sorter Core Loop\nprint(\'Memantau Folder Downloads...\')')" class="text-xs text-accent hover:underline font-semibold flex items-center gap-1">
+                                Intip Kode <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Poster (Diubah data-category nya ke "poster") -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden flex flex-col" data-category="poster">
+                    <div class="h-44 bg-gray-900 relative overflow-hidden">
+                        <img src="f1 revisi.jpg" alt="Poster" class="w-full h-full object-cover">
+                        <span class="absolute top-3 right-3 px-2 py-1 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-[10px] font-mono">Poster</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg text-white mb-2">Hasil bikin poster</h3>
+                            <p class="text-gray-400 text-xs leading-relaxed mb-4">
+                                ini bebaarapa hasil edit poster
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between border-t border-gray-800 pt-3 mt-2">
+                            <span class="text-[11px] font-mono text-gray-500">Adobe photoshop</span>
+                            <button onclick="openLightbox('f1 revisi.jpg', 'Hasil bikin poster F1')" class="text-xs text-accent hover:underline font-semibold flex items-center gap-1">
+                                Lihat Poster <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Spam Chat Simulator -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden flex flex-col" data-category="python">
+                    <div class="h-44 bg-gray-900 relative overflow-hidden flex items-center justify-center p-4">
+                        <div class="w-full h-full font-mono text-[10px] text-cyan-400/60 leading-tight select-none overflow-hidden">
+                            import pyautogui, time<br/>
+                            time.sleep(5)<br/>
+                            for i in range(10):<br/>
+                            &nbsp;&nbsp;pyautogui.write('P')<br/>
+                            &nbsp;&nbsp;pyautogui.press('enter')<br/>
+                        </div>
+                        <span class="absolute top-3 right-3 px-2 py-1 rounded bg-yellow-500/20 text-yellow-300 border border-yellow-500/30 text-[10px] font-mono">Python</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg text-white mb-2">PyAutoGUI Auto-Sender</h3>
+                            <p class="text-gray-400 text-xs leading-relaxed mb-4">
+                                Program skrip otomatisasi GUI untuk mengirim teks berantai secara cepat menggunakan PyAutoGUI.
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between border-t border-gray-800 pt-3 mt-2">
+                            <span class="text-[11px] font-mono text-gray-500">GUI Automation</span>
+                            <button onclick="openModal('PyAutoGUI Auto Sender', 'Program otomatisasi pengetikan teks sederhana untuk eksperimen keyboard simulation.', 'import pyautogui, time\n\nprint(\'Mulai dalam 5 detik...\')\ntime.sleep(5)\nfor i in range(5):\n    pyautogui.write(\'Halo!\')\n    pyautogui.press(\'enter\')')" class="text-xs text-accent hover:underline font-semibold flex items-center gap-1">
+                                Intip Kode <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Retro Cyberpunk Dashboard -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden flex flex-col" data-category="design">
+                    <div class="h-44 bg-gray-900 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" alt="Cyberpunk UI" class="w-full h-full object-cover">
+                        <span class="absolute top-3 right-3 px-2 py-1 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[10px] font-mono">Design UI</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-lg text-white mb-2">Retro CLI Concept UI</h3>
+                            <p class="text-gray-400 text-xs leading-relaxed mb-4">
+                                Desain konsep antarmuka sistem CLI bertema retro-futuristic cyberpunk untuk pemantauan CPU & RAM.
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between border-t border-gray-800 pt-3 mt-2">
+                            <span class="text-[11px] font-mono text-gray-500">UI Concept</span>
+                            <button onclick="openModal('Retro CLI UI Design', 'Konsep visual antarmuka terminal retro berbasis warna neon neon dan font monospaced.', 'Didesain menggunakan skema warna Cyberpunk, gabungan font Fira Code dan aksen neon glow.')" class="text-xs text-accent hover:underline font-semibold flex items-center gap-1">
+                                Detail UI <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- MUKA & GALERI MOMEN SECTION -->
+    <section id="galeri" class="py-20 px-4 border-t border-gray-800/60 bg-gray-950/40">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-xs font-mono text-accent uppercase tracking-widest">Foto & Foto Muka</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-1">Muka & Galeri Momen</h2>
+                <p class="text-gray-400 text-sm mt-2">Koleksi foto iseng, tempat ngoding, dan muka pas lagi pusing mikirin bug.</p>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                
+                <!-- Gallery Item 1 -->
+                <div onclick="openLightbox('foto muka web.jpeg', 'Selfie')" class="group relative rounded-2xl overflow-hidden glass border border-gray-800 h-60 cursor-pointer">
+                    <img src="foto muka web.jpeg" alt="Selfie" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                        <span class="text-xs font-bold text-white">Miror ganteng 😎</span>
+                        <span class="text-[10px] text-gray-300">Klik untuk perbesar</span>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div onclick="openLightbox('Set up .jpeg', 'Kece Banget')" class="group relative rounded-2xl overflow-hidden glass border border-gray-800 h-60 cursor-pointer">
+                    <img src="Set up .jpeg" alt="Kece banget" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                        <span class="text-xs font-bold text-white">Setup Laptop & Kopi 💻</span>
+                        <span class="text-[10px] text-gray-300">Klik untuk perbesar</span>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div onclick="openLightbox('foto muka 3.jpeg', 'Nongkrong Sambil Ngoding')" class="group relative rounded-2xl overflow-hidden glass border border-gray-800 h-60 cursor-pointer">
+                    <img src="foto muka 3.jpeg" alt="Momen Ngoding" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                        <span class="text-xs font-bold text-white">Selfie gabut</span>
+                        <span class="text-[10px] text-gray-300">Klik untuk perbesar</span>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div onclick="openLightbox('foto badan.jpeg', 'Fitness')" class="group relative rounded-2xl overflow-hidden glass border border-gray-800 h-60 cursor-pointer">
+                    <img src="foto badan.jpeg" alt="Fitness" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                        <span class="text-xs font-bold text-white">Mode Serius 🧐</span>
+                        <span class="text-[10px] text-gray-300">Klik untuk perbesar</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PESAN RAHASIA / BUKU TAMU SECTION -->
+    <section id="pesan" class="py-20 px-4 border-t border-gray-800/60">
+        <div class="max-w-4xl mx-auto">
+            
+            <div class="text-center mb-10">
+                <span class="text-xs font-mono text-accent uppercase tracking-widest">Interactive Guestbook</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-1">Kontak & Pesan Rahasia</h2>
+                <p class="text-gray-400 text-sm mt-2">Tinggalkan pesan, salam, atau masukan anonim di sini! Pesan akan langsung muncul secara otomatis di papan bawah.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                
+                <!-- Message Input Form -->
+                <div class="md:col-span-5 glass-card p-6 rounded-2xl">
+                    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-pen-to-square text-accent"></i> Tulis Pesan
+                    </h3>
+
+                    <form id="secretMessageForm" onsubmit="handleSendMessage(event)" class="flex flex-col gap-4">
+                        <div>
+                            <label class="block text-xs font-mono text-gray-400 mb-1">Nama / Nickname</label>
+                            <input type="text" id="senderName" required placeholder="misal: Teman Gabut" class="w-full px-4 py-2.5 rounded-xl bg-gray-900/80 border border-gray-700 text-sm text-gray-100 focus:outline-none focus:border-accent">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-mono text-gray-400 mb-1">Pesan Kamu</label>
+                            <textarea id="senderMessage" required rows="4" placeholder="Tulis sesuatu di sini..." class="w-full px-4 py-2.5 rounded-xl bg-gray-900/80 border border-gray-700 text-sm text-gray-100 focus:outline-none focus:border-accent resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3 rounded-xl bg-accent-gradient text-black font-extrabold text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Kirim Pesan Now
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Live Message Board -->
+                <div class="md:col-span-7 flex flex-col">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-bold text-sm text-gray-300 flex items-center gap-2">
+                            <i class="fa-solid fa-comments text-accent"></i> Papan Pesan Masuk
+                        </h3>
+                        <span id="msgCount" class="text-xs font-mono text-accent">0 Pesan</span>
+                    </div>
+
+                    <div id="messagesList" class="flex-1 max-h-80 overflow-y-auto flex flex-col gap-3 pr-1">
+                        <!-- Messages dynamically rendered here -->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-8 border-t border-gray-800/80 text-center text-xs text-gray-500">
+        <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <span>© 2026 Web Gabut Portofolio. Dibuat dengan Python</span>
+            <div class="flex items-center gap-4 text-gray-400">
+                <a href="#home" class="hover:text-accent">Kembali ke Atas ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CODE PREVIEW MODAL -->
+    <div id="codeModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="glass-card max-w-lg w-full rounded-2xl overflow-hidden border border-gray-700 flex flex-col max-h-[85vh]">
+            <div class="px-5 py-4 border-b border-gray-800 flex items-center justify-between bg-gray-900/60">
+                <h3 id="modalTitle" class="font-bold text-base text-white">Title</h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-5 overflow-y-auto space-y-3">
+                <p id="modalDesc" class="text-xs text-gray-300 leading-relaxed"></p>
+                <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 font-mono text-xs text-emerald-400 overflow-x-auto">
+                    <pre id="modalCode"></pre>
+                </div>
+            </div>
+            <div class="px-5 py-3 border-t border-gray-800 bg-gray-900/40 text-right">
+                <button onclick="closeModal()" class="px-4 py-1.5 rounded-lg bg-gray-800 hover:bg-gray-700 text-xs text-gray-200">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4" onclick="closeLightbox()">
+        <div class="relative max-w-3xl w-full flex flex-col items-center" onclick="event.stopPropagation()">
+            <button onclick="closeLightbox()" class="absolute -top-10 right-0 text-white text-2xl hover:text-accent"><i class="fa-solid fa-xmark"></i></button>
+            <img id="lightboxImg" src="" alt="Enlarged" class="max-h-[75vh] rounded-2xl object-contain border border-gray-800">
+            <span id="lightboxCaption" class="mt-3 text-sm text-gray-300 font-medium"></span>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Typing Effect Words
+        const typingWords = ["Python Script...", "Web App...", "Otomatisasi...", "Project Gabut..."];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingElement = document.getElementById("typingText");
+
+        function typeEffect() {
+            const currentWord = typingWords[wordIndex];
+            if (isDeleting) {
+                typingElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 1800; // Pause at end of word
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % typingWords.length;
+                typeSpeed = 300;
+            }
+
+            setTimeout(typeEffect, typeSpeed);
+        }
+
+        // Accent Theme Switcher
+        function setTheme(themeClass) {
+            document.body.className = "dark scroll-smooth " + themeClass;
+        }
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById("mobileMenuBtn");
+        const mobileMenu = document.getElementById("mobileMenu");
+        mobileBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
+
+        document.querySelectorAll(".mobile-link").forEach(link => {
+            link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
+        });
+
+        // Filter Projects (Diperbarui agar case-insensitive dan mendeteksi target button dengan aman)
+        function filterProjects(category, event) {
+            const cards = document.querySelectorAll(".project-card");
+            const filterBtns = document.querySelectorAll(".filter-btn");
+
+            filterBtns.forEach(btn => {
+                btn.classList.remove("bg-accent", "text-black");
+                btn.classList.add("bg-gray-800", "text-gray-300");
+            });
+
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.remove("bg-gray-800", "text-gray-300");
+                event.currentTarget.classList.add("bg-accent", "text-black");
+            }
+
+            const targetCategory = category.toLowerCase();
+
+            cards.forEach(card => {
+                const cardCategory = (card.dataset.category || "").toLowerCase();
+                if (targetCategory === "all" || cardCategory === targetCategory) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // Code Preview Modal
+        function openModal(title, desc, code) {
+            document.getElementById("modalTitle").textContent = title;
+            document.getElementById("modalDesc").textContent = desc;
+            document.getElementById("modalCode").textContent = code;
+            document.getElementById("codeModal").classList.remove("hidden");
+            document.getElementById("codeModal").classList.add("flex");
+        }
+
+        function closeModal() {
+            document.getElementById("codeModal").classList.add("hidden");
+            document.getElementById("codeModal").classList.remove("flex");
+        }
+
+        // Lightbox Modal
+        function openLightbox(imgSrc, caption) {
+            document.getElementById("lightboxImg").src = imgSrc;
+            document.getElementById("lightboxCaption").textContent = caption;
+            document.getElementById("lightboxModal").classList.remove("hidden");
+            document.getElementById("lightboxModal").classList.add("flex");
+        }
+
+        function closeLightbox() {
+            document.getElementById("lightboxModal").classList.add("hidden");
+            document.getElementById("lightboxModal").classList.remove("flex");
+        }
+
+        // Secret Messages LocalStorage Guestbook
+        const defaultMessages = [
+            { name: "Kawan Ngoding", msg: "Keren bang portofolio gabutnya, lanjut bikin bot WA!", time: "Baru saja" },
+            { name: "Seseorang", msg: "Penasaran sama script auto-sorternya, mau coba dipasang ah.", time: "1 jam lalu" }
+        ];
+
+        function loadMessages() {
+            const stored = localStorage.getItem("gabut_messages");
+            const messages = stored ? JSON.parse(stored) : defaultMessages;
+            const container = document.getElementById("messagesList");
+            const countEl = document.getElementById("msgCount");
+
+            countEl.textContent = `${messages.length} Pesan`;
+            container.innerHTML = "";
+
+            messages.forEach(m => {
+                const card = document.createElement("div");
+                card.className = "p-3.5 rounded-xl glass border border-gray-800 flex flex-col gap-1 text-xs";
+                card.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-accent">${escapeHtml(m.name)}</span>
+                        <span class="text-[10px] text-gray-500">${m.time}</span>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed">${escapeHtml(m.msg)}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function handleSendMessage(e) {
+            e.preventDefault();
+            const nameInput = document.getElementById("senderName");
+            const msgInput = document.getElementById("senderMessage");
+
+            const stored = localStorage.getItem("gabut_messages");
+            const messages = stored ? JSON.parse(stored) : defaultMessages;
+
+            const newMsg = {
+                name: nameInput.value.trim(),
+                msg: msgInput.value.trim(),
+                time: "Baru saja"
+            };
+
+            messages.unshift(newMsg);
+            localStorage.setItem("gabut_messages", JSON.stringify(messages));
+
+            nameInput.value = "";
+            msgInput.value = "";
+            loadMessages();
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        // Initialize on Window Load
+        window.onload = function() {
+            typeEffect();
+            loadMessages();
+        };
+    </script>
+</body>
+</html>
