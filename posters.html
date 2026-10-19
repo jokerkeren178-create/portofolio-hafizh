@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0f19">
+  <title>Galeri Poster | Portofolio Hafizh</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { brand: { cyan:'#06b6d4', purple:'#a855f7', pink:'#ec4899' } }, fontFamily: { sans:['Inter','sans-serif'], mono:['Fira Code','monospace'] } } } };
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --accent-color:#06b6d4; --accent-glow:rgba(6,182,212,.3); --accent-gradient:linear-gradient(135deg,#06b6d4,#3b82f6); }
+    .theme-purple { --accent-color:#a855f7; --accent-glow:rgba(168,85,247,.3); --accent-gradient:linear-gradient(135deg,#a855f7,#ec4899); }
+    .theme-emerald { --accent-color:#10b981; --accent-glow:rgba(16,185,129,.3); --accent-gradient:linear-gradient(135deg,#10b981,#06b6d4); }
+    .theme-amber { --accent-color:#f59e0b; --accent-glow:rgba(245,158,11,.3); --accent-gradient:linear-gradient(135deg,#f59e0b,#ef4444); }
+    body { font-family:Inter,sans-serif; background:#0b0f19; color:#f3f4f6; overflow-x:hidden; }
+    .glass { background:rgba(17,24,39,.78); backdrop-filter:blur(16px); border:1px solid rgba(255,255,255,.08); }
+    .glass-card { background:rgba(30,41,59,.5); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,.06); transition:all .3s ease; }
+    .glass-card:hover { border-color:var(--accent-color); box-shadow:0 10px 30px -10px var(--accent-glow); transform:translateY(-4px); }
+    .text-accent { color:var(--accent-color); } .bg-accent-gradient { background:var(--accent-gradient); }
+    ::-webkit-scrollbar { width:8px; } ::-webkit-scrollbar-track { background:#0b0f19; } ::-webkit-scrollbar-thumb { background:#1f2937; border-radius:4px; } ::-webkit-scrollbar-thumb:hover { background:var(--accent-color); }
+  </style>
+</head>
+<body class="selection:bg-cyan-500 selection:text-black">
+  <div class="fixed -top-20 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="fixed bottom-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+  
+  <nav class="fixed top-0 inset-x-0 z-40 glass px-4 lg:px-12 py-3">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      <a href="index.html#home" class="flex items-center gap-2 font-extrabold text-xl tracking-wider">
+        <span class="w-8 h-8 rounded-lg bg-accent-gradient flex items-center justify-center text-black font-black">H</span>
+        <span>Portofolio<span class="text-accent"> hafizh</span></span>
+      </a>
+      <div class="flex items-center gap-3">
+        <a href="index.html#karya" class="hidden sm:inline-flex items-center gap-2 text-sm text-gray-300 hover:text-white">
+          <i class="fa-solid fa-arrow-left text-accent"></i> Kembali ke portofolio
+        </a>
+        <div class="flex items-center gap-1.5 p-1.5 bg-gray-900/80 rounded-full border border-gray-800" aria-label="Pilih tema warna">
+          <button onclick="setTheme('')" class="w-4 h-4 rounded-full bg-cyan-500" title="Tema cyan" aria-label="Tema cyan"></button>
+          <button onclick="setTheme('theme-purple')" class="w-4 h-4 rounded-full bg-purple-500" title="Tema ungu" aria-label="Tema ungu"></button>
+          <button onclick="setTheme('theme-emerald')" class="w-4 h-4 rounded-full bg-emerald-500" title="Tema emerald" aria-label="Tema emerald"></button>
+          <button onclick="setTheme('theme-amber')" class="w-4 h-4 rounded-full bg-amber-500" title="Tema amber" aria-label="Tema amber"></button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-32 pb-20">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-10">
+      <div>
+        <span class="text-xs font-mono text-accent uppercase tracking-widest">Creative showcase / poster archive</span>
+        <h1 class="text-4xl sm:text-5xl font-black mt-2">Galeri <span class="bg-accent-gradient bg-clip-text text-transparent">Poster</span></h1>
+        <p class="text-gray-400 mt-3 max-w-2xl text-sm sm:text-base leading-relaxed">Kumpulan karya poster. Klik salah satu karya untuk melihat gambar besar, konsep, palet warna, tipografi, dan software yang digunakan.</p>
+      </div>
+      <a href="index.html#karya" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl glass hover:bg-gray-800 text-sm font-semibold">
+        <i class="fa-solid fa-arrow-left text-accent"></i> Kembali
+      </a>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-8" id="filters">
+      <button data-filter="all" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-accent-gradient text-black">Semua karya</button>
+      <button data-filter="poster" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-gray-800 text-gray-300 hover:bg-gray-700">Poster</button>
+      <button data-filter="manipulasi" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-gray-800 text-gray-300 hover:bg-gray-700">Photo manipulation</button>
+      <button data-filter="logo" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-gray-800 text-gray-300 hover:bg-gray-700">Logo</button>
+      <button data-filter="motion" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-gray-800 text-gray-300 hover:bg-gray-700">Motion graphics</button>
+    </div>
+
+    <section id="gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" aria-label="Daftar karya">
+      <!-- Karya 1: Poster F1 Revisi -->
+      <article class="art-card glass-card rounded-2xl overflow-hidden flex flex-col" data-category="poster">
+        <button class="art-image h-72 bg-gray-950 relative flex items-center justify-center overflow-hidden w-full border-0 cursor-pointer" onclick="openDetail('f1')" aria-label="Buka detail Poster F1 Revisi">
+          <img src="f1 revisi.jpg" alt="Poster bertema Formula 1" class="w-full h-full object-contain p-3" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')">
+          <div class="hidden absolute inset-0 flex flex-col items-center justify-center text-gray-500 p-5 text-center">
+            <i class="fa-regular fa-image text-4xl mb-3"></i>
+            <span class="text-sm">File “f1 revisi.jpg” belum ditemukan</span>
+            <span class="text-xs mt-2">Tambahkan gambar ke folder yang sama dengan file HTML.</span>
+          </div>
+          <span class="absolute top-3 right-3 px-2 py-1 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-[10px] font-mono">POSTER</span>
+        </button>
+        <div class="p-5 flex-1 flex flex-col">
+          <div class="flex-1">
+            <p class="text-[10px] font-mono text-accent uppercase tracking-widest mb-2">Adobe Photoshop</p>
+            <h2 class="font-bold text-xl mb-2">Poster F1 (Revisi)</h2>
+            <p class="text-gray-400 text-sm leading-relaxed">Eksplorasi desain poster bertema Formula 1 dengan penyesuaian detail visual.</p>
+          </div>
+          <button onclick="openDetail('f1')" class="mt-5 pt-4 border-t border-gray-800 text-left text-sm text-accent font-semibold hover:underline bg-transparent border-x-0 border-b-0 cursor-pointer w-full">
+            Lihat detail karya <i class="fa-solid fa-arrow-right ml-1"></i>
+          </button>
+        </div>
+      </article>
+
+      <!-- Karya 2: Poster F1 Max Verstappen -->
+      <article class="art-card glass-card rounded-2xl overflow-hidden flex flex-col" data-category="poster">
+        <button class="art-image h-72 bg-gray-950 relative flex items-center justify-center overflow-hidden w-full border-0 cursor-pointer" onclick="openDetail('f1max')" aria-label="Buka detail Poster F1 Max Verstappen">
+          <img src="f1 max.jpg" alt="Max Verstappen F1 Poster" class="w-full h-full object-contain p-3" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')">
+          <div class="hidden absolute inset-0 flex flex-col items-center justify-center text-gray-500 p-5 text-center">
+            <i class="fa-regular fa-image text-4xl mb-3"></i>
+            <span class="text-sm">File “f1 max.jpg” belum ditemukan</span>
+            <span class="text-xs mt-2">Tambahkan gambar ke folder yang sama dengan file HTML.</span>
+          </div>
+          <span class="absolute top-3 right-3 px-2 py-1 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-[10px] font-mono">POSTER</span>
+        </button>
+        <div class="p-5 flex-1 flex flex-col">
+          <div class="flex-1">
+            <p class="text-[10px] font-mono text-accent uppercase tracking-widest mb-2">Adobe Photoshop</p>
+            <h2 class="font-bold text-xl mb-2">Poster F1 - Max Verstappen</h2>
+            <p class="text-gray-400 text-sm leading-relaxed">Eksplorasi desain poster olahraga bertema pembalap Max Verstappen.</p>
+          </div>
+          <button onclick="openDetail('f1max')" class="mt-5 pt-4 border-t border-gray-800 text-left text-sm text-accent font-semibold hover:underline bg-transparent border-x-0 border-b-0 cursor-pointer w-full">
+            Lihat detail karya <i class="fa-solid fa-arrow-right ml-1"></i>
+          </button>
+        </div>
+      </article>
+
+      <!-- Pesan jika Kategori Kosong -->
+      <div id="emptyCategory" class="hidden sm:col-span-2 lg:col-span-3 glass-card rounded-2xl p-10 text-center">
+        <i class="fa-regular fa-folder-open text-3xl text-accent mb-3"></i>
+        <h2 class="font-bold text-lg">Belum ada karya di kategori ini</h2>
+        <p class="text-gray-400 text-sm mt-2">Nanti tambahkan file logo, photo manipulation, atau motion graphics kamu ke daftar karya di posters.html.</p>
+      </div>
+    </section>
+
+    <p class="text-xs text-gray-500 mt-8">Catatan: Pastikan file gambar <code>f1 revisi.jpg</code> dan <code>f1 max.jpg</code> sudah berada di dalam folder yang sama dengan file HTML ini.</p>
+  </main>
+
+  <!-- Modal Detail -->
+  <div id="detailModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-md p-3 sm:p-6" onclick="closeDetail()">
+    <div class="glass-card max-w-5xl w-full max-h-[92vh] overflow-y-auto rounded-2xl border border-gray-700" onclick="event.stopPropagation()">
+      <div class="sticky top-0 z-10 bg-gray-950/95 border-b border-gray-800 p-4 sm:px-6 flex items-center justify-between gap-3">
+        <div>
+          <p class="text-[10px] font-mono uppercase tracking-widest text-accent">Detail Karya</p>
+          <h2 id="detailTitle" class="font-bold text-lg sm:text-xl">Poster F1</h2>
+        </div>
+        <button onclick="closeDetail()" aria-label="Tutup detail" class="w-10 h-10 rounded-xl bg-gray-800 hover:bg-gray-700 text-xl border-0 text-white cursor-pointer flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-7 p-4 sm:p-6">
+        <div class="min-h-64 rounded-xl bg-gray-950 flex items-center justify-center overflow-hidden">
+          <img id="detailImage" src="f1 revisi.jpg" alt="Poster F1" class="max-w-full max-h-[70vh] object-contain" onerror="this.style.display='none'; document.getElementById('detailFallback').classList.remove('hidden')">
+          <div id="detailFallback" class="hidden text-center text-gray-400 p-6">
+            <i class="fa-regular fa-image text-4xl mb-3"></i>
+            <p>Gambar belum ditemukan. Periksa nama dan lokasi file gambar.</p>
+          </div>
+        </div>
+        <div class="flex flex-col gap-5">
+          <div>
+            <p class="text-xs font-mono text-accent uppercase tracking-widest mb-2">Deskripsi</p>
+            <p id="detailDescription" class="text-sm text-gray-300 leading-relaxed"></p>
+          </div>
+          <div>
+            <p class="text-xs font-mono text-accent uppercase tracking-widest mb-2">Konsep</p>
+            <p id="detailConcept" class="text-sm text-gray-300 leading-relaxed"></p>
+          </div>
+          <div>
+            <p class="text-xs font-mono text-accent uppercase tracking-widest mb-2">Palet warna</p>
+            <div id="detailPalette" class="flex flex-wrap gap-2"></div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="bg-gray-900/80 border border-gray-800 rounded-xl p-4">
+              <p class="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Tipografi</p>
+              <p id="detailTypography" class="text-sm"></p>
+            </div>
+            <div class="bg-gray-900/80 border border-gray-800 rounded-xl p-4">
+              <p class="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Software</p>
+              <p id="detailSoftware" class="text-sm"></p>
+            </div>
+          </div>
+          <p class="text-xs text-gray-500">Kamu bisa mengedit informasi karya di bagian objek <code>artworks</code> pada skrip bawah file ini.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const artworks = {
+      f1: { 
+        title: 'Poster F1 (Revisi)', 
+        image: 'f1 revisi.jpg', 
+        category: 'poster', 
+        description: 'Eksplorasi desain poster bertema Formula 1. Menampilkan atmosfer balap yang dinamis dan kompetitif.', 
+        concept: 'Eksplorasi visual motorsport, kecepatan, dan energi balap.', 
+        palette: [['#0b0f19','Gelap'],['#06b6d4','Cyan'],['#f3f4f6','Putih']], 
+        typography: 'Formula / Sans-serif Modern', 
+        software: 'Adobe Photoshop' 
+      },
+      f1max: { 
+        title: 'Poster F1 - Max Verstappen', 
+        image: 'f1 max.jpg', 
+        category: 'poster', 
+        description: 'Desain poster khusus yang menyoroti pembalap Formula 1 Max Verstappen.', 
+        concept: 'Fokus pada karakter atlet, kecepatan, dan identitas tim balap.', 
+        palette: [['#0b0f19','Gelap'],['#f59e0b','Amber'],['#ef4444','Red']], 
+        typography: 'Bold Athletic Font', 
+        software: 'Adobe Photoshop' 
+      }
+    };
+
+    function setTheme(theme) { 
+      document.body.className = 'dark scroll-smooth ' + theme; 
+    }
+
+    function openDetail(id) {
+      const item = artworks[id]; 
+      if (!item) return;
+      
+      document.getElementById('detailTitle').textContent = item.title;
+      const img = document.getElementById('detailImage'); 
+      const fallback = document.getElementById('detailFallback');
+      
+      img.style.display = 'block'; 
+      fallback.classList.add('hidden'); 
+      img.src = item.image; 
+      img.alt = item.title;
+      img.onerror = function() { 
+        this.style.display = 'none'; 
+        fallback.classList.remove('hidden'); 
+      };
+      
+      document.getElementById('detailDescription').textContent = item.description;
+      document.getElementById('detailConcept').textContent = item.concept;
+      document.getElementById('detailTypography').textContent = item.typography;
+      document.getElementById('detailSoftware').textContent = item.software;
+      
+      const palette = document.getElementById('detailPalette'); 
+      palette.replaceChildren();
+      
+      item.palette.forEach(([color, label]) => { 
+        const swatch = document.createElement('div'); 
+        swatch.className = 'flex items-center gap-2 rounded-lg bg-gray-900 border border-gray-800 px-2 py-2'; 
+        const chip = document.createElement('span'); 
+        chip.className = 'w-7 h-7 rounded-md border border-white/10'; 
+        chip.style.backgroundColor = color; 
+        const text = document.createElement('span'); 
+        text.className = 'text-xs text-gray-300'; 
+        text.textContent = label + ' ' + color; 
+        swatch.append(chip, text); 
+        palette.appendChild(swatch); 
+      });
+      
+      const modal = document.getElementById('detailModal'); 
+      modal.classList.remove('hidden'); 
+      modal.classList.add('flex'); 
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDetail() { 
+      const modal = document.getElementById('detailModal'); 
+      modal.classList.add('hidden'); 
+      modal.classList.remove('flex'); 
+      document.body.style.overflow = ''; 
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter; 
+      let shown = 0;
+      
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('bg-accent-gradient', 'text-black');
+        b.classList.add('bg-gray-800', 'text-gray-300');
+      });
+      
+      btn.classList.add('bg-accent-gradient', 'text-black'); 
+      btn.classList.remove('bg-gray-800', 'text-gray-300');
+      
+      document.querySelectorAll('.art-card').forEach(card => {
+        const visible = filter === 'all' || card.dataset.category === filter;
+        card.classList.toggle('hidden', !visible);
+        if (visible) shown++;
+      });
+      
+      document.getElementById('emptyCategory').classList.toggle('hidden', shown > 0);
+    }));
+
+    document.addEventListener('keydown', e => { 
+      if (e.key === 'Escape') closeDetail(); 
+    });
+  </script>
+</body>
+</html>

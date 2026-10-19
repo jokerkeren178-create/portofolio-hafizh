@@ -351,6 +351,9 @@
                     <span class="text-xs font-mono text-accent uppercase tracking-widest">Showcase Hasil Gabut tapi berkarya</span>
                     <h2 class="text-3xl sm:text-4xl font-extrabold mt-1">Karya & Project</h2>
                 </div>
+                <a href="posters.html" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-accent-gradient text-black font-extrabold text-sm hover:opacity-90 transition-all shadow-lg">
+                    <i class="fa-solid fa-images"></i> Lihat Semua Poster <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
 
                 <!-- Category Filters -->
                 <div class="flex flex-wrap gap-2" id="projectFilters">
@@ -409,8 +412,8 @@
                         </div>
                         <div class="flex items-center justify-between border-t border-gray-800 pt-3 mt-2">
                             <span class="text-[11px] font-mono text-gray-500">Adobe photoshop</span>
-                            <button onclick="openLightbox('f1 revisi.jpg', 'Hasil bikin poster F1')" class="text-xs text-accent hover:underline font-semibold flex items-center gap-1">
-                                Lihat Poster <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            <button onclick="openPosterDetail({title:'Poster F1', image:'f1 revisi.jpg', description:'Eksplorasi desain poster bertema Formula 1. Bagian ini bisa kamu edit untuk menjelaskan ide, komposisi, dan pesan visual dari karya.', concept:'Eksplorasi visual motorsport dan energi balap.', palette:[['#0b0f19','Gelap'],['#06b6d4','Cyan'],['#f3f4f6','Putih']], typography:'Isi sesuai font yang kamu gunakan', software:'Adobe Photoshop'})" class="text-xs text-accent hover:underline font-semibold flex items-center gap-1">
+                                Detail Karya <i class="fa-solid fa-arrow-right text-[10px]"></i>
                             </button>
                         </div>
                     </div>
@@ -579,7 +582,7 @@
     <!-- FOOTER -->
     <footer class="py-8 border-t border-gray-800/80 text-center text-xs text-gray-500">
         <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <span>© 2026 Web Gabut Portofolio. Dibuat dengan Python</span>
+            <span>© 2026 Web Gabut Portofolio. Dibuat dengan HTML, CSS & JavaScript</span>
             <div class="flex items-center gap-4 text-gray-400">
                 <a href="#home" class="hover:text-accent">Kembali ke Atas ↑</a>
             </div>
@@ -601,6 +604,35 @@
             </div>
             <div class="px-5 py-3 border-t border-gray-800 bg-gray-900/40 text-right">
                 <button onclick="closeModal()" class="px-4 py-1.5 rounded-lg bg-gray-800 hover:bg-gray-700 text-xs text-gray-200">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- POSTER DETAIL MODAL -->
+    <div id="posterDetailModal" class="fixed inset-0 z-[60] bg-black/90 backdrop-blur-md hidden items-center justify-center p-4" onclick="closePosterDetail()">
+        <div class="glass-card max-w-5xl w-full max-h-[90vh] overflow-y-auto rounded-2xl border border-gray-700" onclick="event.stopPropagation()">
+            <div class="sticky top-0 z-10 px-5 py-4 border-b border-gray-800 bg-gray-950/95 flex items-center justify-between">
+                <div>
+                    <p class="text-[10px] font-mono uppercase tracking-widest text-accent">Detail Karya</p>
+                    <h3 id="posterDetailTitle" class="font-bold text-lg">Judul Karya</h3>
+                </div>
+                <button onclick="closePosterDetail()" aria-label="Tutup detail karya" class="w-10 h-10 rounded-xl bg-gray-800 hover:bg-gray-700 text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-5 md:p-7">
+                <div class="rounded-xl overflow-hidden bg-gray-950 min-h-64 flex items-center justify-center">
+                    <img id="posterDetailImage" src="" alt="Pratinjau karya" class="max-w-full max-h-[65vh] object-contain" onerror="this.style.display='none'; document.getElementById('posterImageFallback').classList.remove('hidden')">
+                    <div id="posterImageFallback" class="hidden p-8 text-center text-gray-400"><i class="fa-regular fa-image text-4xl mb-3"></i><p>Gambar belum ditemukan. Pastikan file gambar ada di folder repository.</p></div>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <div><p class="text-xs uppercase tracking-widest font-mono text-accent mb-2">Deskripsi</p><p id="posterDetailDescription" class="text-sm text-gray-300 leading-relaxed"></p></div>
+                    <div><p class="text-xs uppercase tracking-widest font-mono text-accent mb-2">Konsep</p><p id="posterDetailConcept" class="text-sm text-gray-300 leading-relaxed"></p></div>
+                    <div><p class="text-xs uppercase tracking-widest font-mono text-accent mb-2">Palet Warna</p><div id="posterDetailPalette" class="flex flex-wrap gap-3"></div></div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="rounded-xl bg-gray-900/80 border border-gray-800 p-4"><p class="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Tipografi</p><p id="posterDetailTypography" class="text-sm text-gray-200"></p></div>
+                        <div class="rounded-xl bg-gray-900/80 border border-gray-800 p-4"><p class="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Software</p><p id="posterDetailSoftware" class="text-sm text-gray-200"></p></div>
+                    </div>
+                    <p class="text-xs text-gray-500">Metadata ini bisa kamu ubah langsung pada pemanggilan <code>openPosterDetail</code> di file index.html.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -703,6 +735,55 @@
             document.getElementById("codeModal").classList.add("hidden");
             document.getElementById("codeModal").classList.remove("flex");
         }
+
+        // Poster artwork details modal
+        function openPosterDetail(item) {
+            document.getElementById('posterDetailTitle').textContent = item.title || 'Detail Karya';
+            const image = document.getElementById('posterDetailImage');
+            const fallback = document.getElementById('posterImageFallback');
+            image.style.display = 'block';
+            fallback.classList.add('hidden');
+            image.src = item.image || '';
+            image.alt = item.title || 'Pratinjau karya';
+            document.getElementById('posterDetailDescription').textContent = item.description || 'Tambahkan deskripsi karya.';
+            document.getElementById('posterDetailConcept').textContent = item.concept || 'Tambahkan konsep karya.';
+            document.getElementById('posterDetailTypography').textContent = item.typography || 'Belum diisi';
+            document.getElementById('posterDetailSoftware').textContent = item.software || 'Belum diisi';
+            const palette = document.getElementById('posterDetailPalette');
+            palette.replaceChildren();
+            (item.palette || []).forEach(([color, label]) => {
+                const swatch = document.createElement('div');
+                swatch.className = 'flex items-center gap-2 rounded-lg bg-gray-900 border border-gray-800 px-2 py-2';
+                const chip = document.createElement('span');
+                chip.className = 'w-7 h-7 rounded-md border border-white/10';
+                chip.style.backgroundColor = color;
+                const caption = document.createElement('span');
+                caption.className = 'text-xs text-gray-300';
+                caption.textContent = `${label || ''} ${color}`.trim();
+                swatch.append(chip, caption);
+                palette.appendChild(swatch);
+            });
+            const modal = document.getElementById('posterDetailModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePosterDetail() {
+            const modal = document.getElementById('posterDetailModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        // Close open overlays with Escape.
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closePosterDetail();
+                closeModal();
+                closeLightbox();
+            }
+        });
 
         // Lightbox Modal
         function openLightbox(imgSrc, caption) {
